@@ -69,13 +69,13 @@ const DESKTOP_ICONS: {
   w: number;
   h: number;
 }[] = [
-    { type: 'ABOUT', label: 'About Me', icon: <IconUser size={32} />, menuIcon: <IconUser size={16} />, w: 640, h: 420 },
-    { type: 'PROJECTS', label: 'My Projects', icon: <IconFolder size={32} />, menuIcon: <IconFolder size={16} />, w: 660, h: 480 },
-    { type: 'SKILLS', label: 'Skills.txt', icon: <IconNotepad size={32} />, menuIcon: <IconNotepad size={16} />, w: 500, h: 400 },
-    { type: 'CONTACT', label: 'Contact Me', icon: <IconMail size={32} />, menuIcon: <IconMail size={16} />, w: 440, h: 420 },
-    { type: 'RESUME', label: 'Resume.doc', icon: <IconWordpad size={32} />, menuIcon: <IconWordpad size={16} />, w: 580, h: 520 },
-    { type: 'IE', label: 'Internet\nExplorer', icon: <IconIE size={32} />, menuIcon: <IconIE size={16} />, w: 600, h: 450 },
-    { type: null, label: 'Recycle Bin', icon: <IconRecycleBin size={32} />, menuIcon: <IconRecycleBin size={16} />, w: 0, h: 0 },
+    { type: 'ABOUT', label: 'About Me', icon: <IconUser size={48} />, menuIcon: <IconUser size={20} />, w: 720, h: 500 },
+    { type: 'PROJECTS', label: 'My Projects', icon: <IconFolder size={48} />, menuIcon: <IconFolder size={20} />, w: 760, h: 560 },
+    { type: 'SKILLS', label: 'Skills.txt', icon: <IconNotepad size={48} />, menuIcon: <IconNotepad size={20} />, w: 600, h: 480 },
+    { type: 'CONTACT', label: 'Contact Me', icon: <IconMail size={48} />, menuIcon: <IconMail size={20} />, w: 540, h: 500 },
+    { type: 'RESUME', label: 'Resume.doc', icon: <IconWordpad size={48} />, menuIcon: <IconWordpad size={20} />, w: 680, h: 620 },
+    { type: 'IE', label: 'Internet\nExplorer', icon: <IconIE size={48} />, menuIcon: <IconIE size={20} />, w: 700, h: 550 },
+    { type: null, label: 'Recycle Bin', icon: <IconRecycleBin size={48} />, menuIcon: <IconRecycleBin size={20} />, w: 0, h: 0 },
   ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -173,7 +173,7 @@ function Win95Window({
   }, []);
 
   const style: React.CSSProperties = win.isMaximized
-    ? { position: 'absolute', left: 0, top: 0, width: '100%', height: 'calc(100% - 28px)', zIndex: win.zIndex }
+    ? { position: 'absolute', left: 0, top: 0, width: '100%', height: 'calc(100% - 32px)', zIndex: win.zIndex }
     : { position: 'absolute', left: pos.x, top: pos.y, width: size.w, height: size.h, zIndex: win.zIndex };
 
   return (
@@ -184,13 +184,13 @@ function Win95Window({
           onMouseDown={onMouseDown}
           onDoubleClick={onMaximize}
           className={isActive ? 'w95-titlebar-active' : 'w95-titlebar-inactive'}
-          style={{ height: 18, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 2px', marginBottom: 1, flexShrink: 0, userSelect: 'none' }}
+          style={{ height: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px', marginBottom: 1, flexShrink: 0, userSelect: 'none' }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 3, overflow: 'hidden' }}>
-            <div style={{ width: 16, height: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               {win.icon}
             </div>
-            <span style={{ fontSize: 11, fontWeight: 'bold', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{win.title}</span>
+            <span style={{ fontSize: 14, fontWeight: 'bold', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{win.title}</span>
           </div>
           <div style={{ display: 'flex', gap: 2, flexShrink: 0 }}>
             <button className="w95-title-btn" onClick={(e) => { e.stopPropagation(); onMinimize(); }}><span style={{ marginTop: 4 }}>_</span></button>
@@ -206,7 +206,7 @@ function Win95Window({
               <div key={menu.label} style={{ position: 'relative' }}>
                 <span
                   style={{
-                    padding: '1px 6px', fontSize: 11, cursor: 'default',
+                    padding: '2px 8px', fontSize: 14, cursor: 'default',
                     background: openMenu === menu.label ? '#000080' : 'transparent',
                     color: openMenu === menu.label ? '#fff' : '#000',
                   }}
@@ -227,7 +227,7 @@ function Win95Window({
                         key={i}
                         onClick={() => { if (!item.disabled) { item.onClick(); setOpenMenu(null); } }}
                         style={{
-                          display: 'flex', justifyContent: 'space-between', padding: '2px 20px 2px 6px', fontSize: 11, cursor: 'default',
+                          display: 'flex', justifyContent: 'space-between', padding: '4px 24px 4px 8px', fontSize: 14, cursor: 'default',
                           color: item.disabled ? '#808080' : '#000',
                         }}
                         onMouseEnter={e => { if (!item.disabled) { (e.currentTarget).style.background = '#000080'; (e.currentTarget).style.color = '#fff'; } }}
@@ -251,8 +251,8 @@ function Win95Window({
 
         {/* Status Bar */}
         <div style={{ display: 'flex', gap: 2, marginTop: 2, flexShrink: 0 }}>
-          <div className="w95-groove" style={{ flex: 1, padding: '1px 4px', fontSize: 11, color: '#808080' }}>Ready</div>
-          <div className="w95-groove" style={{ width: 100, padding: '1px 4px', fontSize: 11, color: '#808080' }}>My Computer</div>
+          <div className="w95-groove" style={{ flex: 1, padding: '2px 6px', fontSize: 13, color: '#808080' }}>Ready</div>
+          <div className="w95-groove" style={{ width: 120, padding: '2px 6px', fontSize: 13, color: '#808080' }}>My Computer</div>
         </div>
 
         {/* Resize Handle */}
@@ -272,18 +272,18 @@ function Win95Window({
 //  DIALOG BOX
 // ═══════════════════════════════════════════════════════════════
 function DialogBox({ dialog, onClose }: { dialog: DialogState; onClose: () => void }) {
-  const iconEl = dialog.icon === 'info' ? <IconInfo size={32} /> : dialog.icon === 'warning' ? <IconWarning size={32} /> : <IconError size={32} />;
+  const iconEl = dialog.icon === 'info' ? <IconInfo size={48} /> : dialog.icon === 'warning' ? <IconWarning size={48} /> : <IconError size={48} />;
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 999999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ position: 'absolute', inset: 0 }} onClick={onClose} />
       <div className="w95-outset" style={{ background: '#c0c0c0', padding: 2, minWidth: 320, position: 'relative', zIndex: 1 }}>
         <div className="w95-titlebar-active" style={{ height: 18, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px', marginBottom: 2 }}>
-          <span style={{ fontSize: 11, fontWeight: 'bold', color: '#fff' }}>{dialog.title}</span>
+          <span style={{ fontSize: 14, fontWeight: 'bold', color: '#fff' }}>{dialog.title}</span>
           <button className="w95-title-btn" onClick={onClose}><span>×</span></button>
         </div>
         <div style={{ padding: '12px 16px', display: 'flex', gap: 16, alignItems: 'flex-start' }}>
           <div style={{ flexShrink: 0 }}>{iconEl}</div>
-          <div style={{ fontSize: 11, lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{dialog.message}</div>
+          <div style={{ fontSize: 14, lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{dialog.message}</div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', gap: 8, padding: '8px 16px 12px' }}>
           {dialog.buttons.map((btn, i) => (
@@ -466,9 +466,9 @@ function BootScreen({ onDone }: { onDone: () => void }) {
 
   if (phase < 6) {
     return (
-      <div style={{ position: 'fixed', inset: 0, background: '#000', zIndex: 99999999, padding: '30px 40px', fontFamily: 'monospace', color: '#c0c0c0', fontSize: 16 }}>
+      <div style={{ position: 'fixed', inset: 0, background: '#000', zIndex: 99999999, padding: '40px 60px', fontFamily: 'monospace', color: '#c0c0c0', fontSize: 18 }}>
         {/* Fake Energy Star Logo */}
-        <div style={{ position: 'absolute', top: 30, right: 50, border: '2px solid #c0c0c0', padding: '4px 12px', textAlign: 'center', fontSize: 14 }}>
+        <div style={{ position: 'absolute', top: 40, right: 60, border: '2px solid #c0c0c0', padding: '6px 16px', textAlign: 'center', fontSize: 16 }}>
           <div style={{ fontStyle: 'italic', fontWeight: 'bold' }}>EPA</div>
           <div>POLLUTION PREVENTER</div>
         </div>
@@ -562,18 +562,18 @@ function AboutContent() {
 
   type TreeNode = { id: string; label: string; icon: React.ReactNode; children?: TreeNode[] };
   const tree: TreeNode[] = [{
-    id: 'desktop', label: 'Desktop', icon: <IconComputer size={16} />,
+    id: 'desktop', label: 'Desktop', icon: <IconComputer size={20} />,
     children: [{
-      id: 'computer', label: 'My Computer', icon: <IconComputer size={16} />,
+      id: 'computer', label: 'My Computer', icon: <IconComputer size={20} />,
       children: [
         {
-          id: 'c', label: '(C:)', icon: <IconFolder size={16} />, children: [
-            { id: 'about', label: 'about_me.txt', icon: <IconNotepad size={16} /> },
-            { id: 'bio', label: 'biography.txt', icon: <IconNotepad size={16} /> },
-            { id: 'hobbies', label: 'hobbies.txt', icon: <IconNotepad size={16} /> },
+          id: 'c', label: '(C:)', icon: <IconFolder size={20} />, children: [
+            { id: 'about', label: 'about_me.txt', icon: <IconNotepad size={20} /> },
+            { id: 'bio', label: 'biography.txt', icon: <IconNotepad size={20} /> },
+            { id: 'hobbies', label: 'hobbies.txt', icon: <IconNotepad size={20} /> },
           ]
         },
-        { id: 'panel', label: 'Control Panel', icon: <IconSettings size={16} /> },
+        { id: 'panel', label: 'Control Panel', icon: <IconSettings size={20} /> },
       ]
     }]
   }];
@@ -588,14 +588,14 @@ function AboutContent() {
             <div
               onClick={() => { setSelected(node.id); if (hasChildren) toggleNode(node.id); }}
               style={{
-                paddingLeft: 4 + depth * 16, display: 'flex', alignItems: 'center', gap: 3,
-                padding: '1px 2px 1px ' + (4 + depth * 16) + 'px', cursor: 'default', fontSize: 11,
+                paddingLeft: 6 + depth * 20, display: 'flex', alignItems: 'center', gap: 6,
+                padding: '2px 4px 2px ' + (6 + depth * 20) + 'px', cursor: 'default', fontSize: 14,
                 background: selected === node.id ? '#000080' : 'transparent',
                 color: selected === node.id ? '#fff' : '#000',
               }}
             >
-              {hasChildren && <span style={{ width: 10, fontSize: 9, textAlign: 'center', flexShrink: 0 }}>{expanded ? '▼' : '▶'}</span>}
-              {!hasChildren && <span style={{ width: 10, flexShrink: 0 }} />}
+              {hasChildren && <span style={{ width: 14, fontSize: 12, textAlign: 'center', flexShrink: 0 }}>{expanded ? '▼' : '▶'}</span>}
+              {!hasChildren && <span style={{ width: 14, flexShrink: 0 }} />}
               <span style={{ flexShrink: 0 }}>{node.icon}</span>
               <span>{node.label}</span>
             </div>
@@ -614,40 +614,40 @@ function AboutContent() {
             <IconUser size={48} />
           </div>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 'bold' }}>Adam</div>
-            <div style={{ fontSize: 11, color: '#808080' }}>Full Stack Developer (trying to be one)</div>
-            <div style={{ fontSize: 11, color: '#808080' }}>Nijmegen, NL</div>
+            <div style={{ fontSize: 20, fontWeight: 'bold' }}>Adam</div>
+            <div style={{ fontSize: 14, color: '#808080' }}>Full Stack Developer (trying to be one)</div>
+            <div style={{ fontSize: 14, color: '#808080' }}>Nijmegen, NL</div>
           </div>
         </div>
         <HR />
-        <p style={{ margin: '6px 0', fontSize: 11 }}>Welcome to my personal homepage on the World Wide Web!</p>
-        <p style={{ margin: '6px 0', fontSize: 11 }}>I am a passionate developer who builds real projects — from production web apps used by actual businesses, to AI-powered desktop tools and interactive maps. I love going beyond what school teaches and building things that actually work.</p>
-        <p style={{ margin: '6px 0', fontSize: 11 }}>Feel free to explore my directories. If you want to chat, send me an electronic mail via the Contact shortcut on the desktop.</p>
+        <p style={{ margin: '8px 0', fontSize: 14 }}>Welcome to my personal homepage on the World Wide Web!</p>
+        <p style={{ margin: '8px 0', fontSize: 14 }}>I am a passionate developer who builds real projects — from production web apps used by actual businesses, to AI-powered desktop tools and interactive maps. I love going beyond what school teaches and building things that actually work.</p>
+        <p style={{ margin: '8px 0', fontSize: 14 }}>Feel free to explore my directories. If you want to chat, send me an electronic mail via the Contact shortcut on the desktop.</p>
         <HR />
-        <table style={{ fontSize: 11, borderCollapse: 'collapse', marginTop: 4 }}>
+        <table style={{ fontSize: 14, borderCollapse: 'collapse', marginTop: 6 }}>
           <tbody>
-            <tr><td style={{ padding: '2px 8px 2px 0', fontWeight: 'bold' }}><div style={{ display: 'flex', alignItems: 'center', gap: 4 }}><IconGlobe size={14} /> Location:</div></td><td>Rotterdam, Netherlands</td></tr>
-            <tr><td style={{ padding: '2px 8px 2px 0', fontWeight: 'bold' }}><div style={{ display: 'flex', alignItems: 'center', gap: 4 }}><IconGithub size={14} /> GitHub:</div></td><td><a href="https://github.com/aznixx" target="_blank" rel="noreferrer" style={{ color: '#0000ff' }}>github.com/aznixx</a></td></tr>
-            <tr><td style={{ padding: '2px 8px 2px 0', fontWeight: 'bold' }}><div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>Status:</div></td><td>Building Jarvis AI</td></tr>
-            <tr><td style={{ padding: '2px 8px 2px 0', fontWeight: 'bold' }}><div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>Visitors:</div></td><td>13,370</td></tr>
+            <tr><td style={{ padding: '4px 12px 4px 0', fontWeight: 'bold' }}><div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><IconGlobe size={20} /> Location:</div></td><td>Rotterdam, Netherlands</td></tr>
+            <tr><td style={{ padding: '4px 12px 4px 0', fontWeight: 'bold' }}><div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><IconGithub size={20} /> GitHub:</div></td><td><a href="https://github.com/aznixx" target="_blank" rel="noreferrer" style={{ color: '#0000ff' }}>github.com/aznixx</a></td></tr>
+            <tr><td style={{ padding: '4px 12px 4px 0', fontWeight: 'bold' }}><div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>Status:</div></td><td>Building Jarvis AI</td></tr>
+            <tr><td style={{ padding: '4px 12px 4px 0', fontWeight: 'bold' }}><div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>Visitors:</div></td><td>13,370</td></tr>
           </tbody>
         </table>
       </>
     ),
     bio: (
       <>
-        <div style={{ fontSize: 13, fontWeight: 'bold', marginBottom: 4 }}>Biography</div>
+        <div style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 6 }}>Biography</div>
         <HR />
-        <p style={{ fontSize: 11, margin: '6px 0' }}>Hey, I'm Adam. I'm a developer based out of Nijmegen who just genuinely loves building things. I started getting into coding outside of my classes, and eventually built my first major full-stack app while still in school (which somehow, a real company is actually using today).</p>
-        <p style={{ fontSize: 11, margin: '6px 0' }}>I like working on projects that have real users and real data. Over the past couple of years, I've hacked together everything from interactive geo-maps for a nature park to custom AI vision models that can detect what's happening on my screen in real-time.</p>
-        <p style={{ fontSize: 11, margin: '6px 0' }}>Right now, my main obsession is Jarvis. I'm basically trying to use Python to build my own version of Iron Man's assistant—complete with voice integration and autonomous PC control. It's a massive challenge, but it's super fun.</p>
+        <p style={{ fontSize: 14, margin: '8px 0' }}>Hey, I'm Adam. I'm a developer based out of Nijmegen who just genuinely loves building things. I started getting into coding outside of my classes, and eventually built my first major full-stack app while still in school (which somehow, a real company is actually using today).</p>
+        <p style={{ fontSize: 14, margin: '8px 0' }}>I like working on projects that have real users and real data. Over the past couple of years, I've hacked together everything from interactive geo-maps for a nature park to custom AI vision models that can detect what's happening on my screen in real-time.</p>
+        <p style={{ fontSize: 14, margin: '8px 0' }}>Right now, my main obsession is Jarvis. I'm basically trying to use Python to build my own version of Iron Man's assistant—complete with voice integration and autonomous PC control. It's a massive challenge, but it's super fun.</p>
       </>
     ),
     hobbies: (
       <>
-        <div style={{ fontSize: 13, fontWeight: 'bold', marginBottom: 4 }}>Hobbies & Interests</div>
+        <div style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 6 }}>Hobbies & Interests</div>
         <HR />
-        <ul style={{ fontSize: 11, paddingLeft: 16, margin: '6px 0' }}>
+        <ul style={{ fontSize: 14, paddingLeft: 20, margin: '8px 0' }}>
           <li>Building side projects that go beyond tutorials</li>
           <li>Reverse engineering games and applying the techniques</li>
           <li>Training custom AI/ML models (Roboflow, Python)</li>
@@ -660,10 +660,10 @@ function AboutContent() {
 
   return (
     <div style={{ display: 'flex', height: '100%' }}>
-      <div className="w95-inset w95-scroll" style={{ width: 180, overflow: 'auto', background: '#fff', flexShrink: 0, padding: 2 }}>
+      <div className="w95-inset w95-scroll" style={{ width: 220, overflow: 'auto', background: '#fff', flexShrink: 0, padding: 2 }}>
         {renderTree(tree, 0)}
       </div>
-      <div style={{ flex: 1, padding: 10, overflow: 'auto', fontSize: 11 }}>
+      <div style={{ flex: 1, padding: 12, overflow: 'auto', fontSize: 14 }}>
         {contentMap[selected] || <div style={{ color: '#808080' }}>Select an item from the tree.</div>}
       </div>
     </div>
@@ -680,7 +680,7 @@ function ProjectsContent({ showDialog }: { showDialog: (d: DialogState) => void 
   const projects = [
     {
       name: 'De Witte Raaf',
-      icon: <IconBeer size={32} />,
+      icon: <IconBeer size={48} />,
       desc: 'A full-stack web application currently in active production use by a real hospitality business. Features a substantial backend with business logic, database management, reservations, and a live deployment.',
       tech: ['Node.js', 'React', 'PostgreSQL', 'Vite'],
       link: 'https://github.com/aznixx/dewitteraaf',
@@ -690,7 +690,7 @@ function ProjectsContent({ showDialog }: { showDialog: (d: DialogState) => void 
     },
     {
       name: 'Park Lingezegen',
-      icon: <IconMap size={32} />,
+      icon: <IconMap size={48} />,
       desc: 'Interactive web map for a Dutch nature park built with Vite and MapLibre GL. Includes a full Supabase (PostgreSQL) backend with real-time zone sync, staff/visitor authentication, CRUD operations for tree zones, spatial calculations using Turf.js and GeoJSON, and an offline localStorage fallback.',
       tech: ['Vite', 'MapLibre GL', 'Supabase', 'PostgreSQL', 'Turf.js', 'GeoJSON'],
       link: 'https://github.com/aznixx/parklingezegen',
@@ -700,7 +700,7 @@ function ProjectsContent({ showDialog }: { showDialog: (d: DialogState) => void 
     },
     {
       name: 'AI Screen Detector',
-      icon: <IconRobot size={32} />,
+      icon: <IconRobot size={48} />,
       desc: 'Python desktop utility that monitors VS Code in real time, detects AI-generated code snippets on screen using a custom-trained Roboflow object detection model, and displays a live confidence-based overlay. Uses screen capture, OpenCV, threading, and persists detection stats across sessions via JSON.',
       tech: ['Python', 'OpenCV', 'Roboflow SDK', 'customtkinter', 'mss', 'NumPy'],
       link: 'https://github.com/aznixx/ai-tracking',
@@ -710,7 +710,7 @@ function ProjectsContent({ showDialog }: { showDialog: (d: DialogState) => void 
     },
     {
       name: 'Jarvis',
-      icon: <IconChip size={32} />,
+      icon: <IconChip size={48} />,
       desc: 'An AI assistant currently in active development that can autonomously perform tasks using voice integration, screen awareness, and AI decision-making. Inspired by Iron Man\'s Jarvis. Still evolving — this is the big one.',
       tech: ['Python', 'AI', 'Voice Integration', 'LLM'],
       link: null,
@@ -720,7 +720,7 @@ function ProjectsContent({ showDialog }: { showDialog: (d: DialogState) => void 
     },
     {
       name: 'Buitenlandse Spoorwegen',
-      icon: <IconTrain size={32} />,
+      icon: <IconTrain size={48} />,
       desc: 'A JavaFX desktop application about foreign railways. Demonstrates object-oriented Java development, desktop UI design, and working with structured data sets.',
       tech: ['Java', 'JavaFX'],
       link: 'https://github.com/aznixx/buitenlandsespoorwegen',
@@ -730,7 +730,7 @@ function ProjectsContent({ showDialog }: { showDialog: (d: DialogState) => void 
     },
     {
       name: 'Quotial',
-      icon: <IconChat size={32} />,
+      icon: <IconChat size={48} />,
       desc: 'A frontend web project deployed on Vercel with a clean, modern UI. Built to demonstrate frontend skills and deployment workflow.',
       tech: ['HTML', 'CSS', 'JavaScript', 'Vercel'],
       link: 'https://quotial.vercel.app',
@@ -966,7 +966,7 @@ function ContactContent({ showDialog }: { showDialog: (d: DialogState) => void }
             <span style={{ fontSize: 11, fontWeight: 'bold', color: '#fff' }}>Message Sent</span>
           </div>
           <div style={{ padding: 16, display: 'flex', gap: 12, alignItems: 'center' }}>
-            <IconInfo size={32} />
+            <IconInfo size={48} />
             <div style={{ fontSize: 11 }}>
               <div style={{ fontWeight: 'bold', marginBottom: 4 }}>Message sent successfully!</div>
               <div style={{ color: '#808080' }}>Your electronic mail is on its way through cyberspace. Estimated delivery: 3-5 business days.</div>
@@ -1152,7 +1152,7 @@ function IEContent({ showDialog }: { showDialog: (d: DialogState) => void }) {
               <div style={{ fontSize: 8, color: '#808080' }}>[ Best viewed with Netscape Navigator 3.0 at 800x600 ]</div>
             </div>
             <div style={{ textAlign: 'center', borderBottom: '3px solid #000080', paddingBottom: 8, marginBottom: 12 }}>
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8, fontSize: 28, fontWeight: 'bold', color: '#000080' }}><IconGlobe size={32} /> Welcome to My Homepage! <IconGlobe size={32} /></div>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8, fontSize: 28, fontWeight: 'bold', color: '#000080' }}><IconGlobe size={48} /> Welcome to My Homepage! <IconGlobe size={48} /></div>
               <div style={{ background: '#ffff00', color: '#ff0000', fontWeight: 'bold', fontSize: 12, padding: 4, display: 'inline-block', marginTop: 4, border: '2px solid #ff0000' }}>UNDER CONSTRUCTION</div>
             </div>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
@@ -1436,13 +1436,13 @@ function RunContent({ showDialog, openWindow, onClose }: { showDialog: (d: Dialo
       showDialog({ title: 'Not Available', message: 'Coming soon...', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] });
       onClose();
     } else if (c === 'mspaint' || c === 'mspaint.exe' || c === 'paint') {
-      openWindow('PAINT', 'untitled - Paint', 560, 440, <IconPaint size={16} />);
+      openWindow('PAINT', 'untitled - Paint', 700, 550, <IconPaint size={20} />);
       onClose();
     } else if (c === 'iexplore' || c === 'iexplore.exe' || c === 'ie') {
-      openWindow('IE', 'Internet Explorer', 600, 450, <IconIE size={16} />);
+      openWindow('IE', 'Internet Explorer', 750, 560, <IconIE size={20} />);
       onClose();
     } else if (c === 'help') {
-      openWindow('HELP', 'Help Topics', 500, 380, <IconHelp size={16} />);
+      openWindow('HELP', 'Help Topics', 625, 475, <IconHelp size={20} />);
       onClose();
     } else if (c === 'dir' || c === 'ls') {
       showDialog({ title: 'C:\\>', message: 'Volume in drive C is SYSTEM\nVolume Serial Number is 1337-DEAD\n\n Directory of C:\\\n\nDEWITTERAAAF  DIR   <DIR>    2026\nPARKLINGEZEGEN DIR  <DIR>    2025\nAI_TRACKING   DIR   <DIR>    2025\nJARVIS        DIR   <DIR>    2026\nSPOORWEGEN    JAR  890,112   2024\nQUOTIAL       DIR   <DIR>    2025\n        6 project(s)', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] });
@@ -1459,7 +1459,7 @@ function RunContent({ showDialog, openWindow, onClose }: { showDialog: (d: Dialo
   return (
     <div style={{ background: '#c0c0c0', padding: 16, height: '100%', display: 'flex', flexDirection: 'column' }}>
       <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 12 }}>
-        <IconRun size={32} />
+        <IconRun size={48} />
         <div style={{ fontSize: 11 }}>
           <div style={{ marginBottom: 4 }}>Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.</div>
           <div style={{ color: '#808080', fontSize: 10, marginTop: 2 }}>Try: notepad, calc, cmd, defrag, minesweeper, mspaint, iexplore, doom, dir, help, exit</div>
@@ -1867,7 +1867,7 @@ export default function App() {
     };
     const helpMenu = {
       label: 'Help', items: [
-        { label: 'Help Topics', onClick: () => openWindow('HELP', 'Help Topics', 500, 380, <IconHelp size={16} />) },
+        { label: 'Help Topics', onClick: () => openWindow('HELP', 'Help Topics', 625, 475, <IconHelp size={20} />) },
         { label: '', onClick: () => { }, separator: true },
         { label: 'About...', onClick: () => showDialog({ title: 'About This Portfolio', message: 'My Portfolio\nVersion 95.0.1337\n\n© 2026 Adam. All Rights Reserved.\n\nPhysical Memory: 640K ought to be enough\nFree Disk Space: Plenty\nMood: Building Jarvis', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] }) },
       ],
@@ -1888,7 +1888,7 @@ export default function App() {
         { label: '', onClick: () => { }, separator: true },
         { label: 'New ▶', onClick: () => showDialog({ title: 'New', message: 'What would you like to create?\n\n• Folder\n• Shortcut\n• Text Document\n• Bitmap Image\n• Wave Sound\n\n(This is a portfolio, so nothing actually.)', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] }) },
         { label: '', onClick: () => { }, separator: true },
-        { label: 'Properties', onClick: () => openWindow('SETTINGS', 'Display Properties', 400, 420, <IconSettings size={16} />) },
+        { label: 'Properties', onClick: () => openWindow('SETTINGS', 'Display Properties', 500, 525, <IconSettings size={20} />) },
       ],
     });
   };
@@ -1960,7 +1960,7 @@ export default function App() {
                   background: selectedIcon === i ? 'rgba(0,0,128,0.5)' : 'transparent',
                   border: selectedIcon === i ? '1px dotted #fff' : '1px solid transparent',
                 }}>
-                  {ic.type === null ? (recycleFull ? <IconRecycleBinFull size={32} /> : <IconRecycleBin size={32} />) : ic.icon}
+                  {ic.type === null ? (recycleFull ? <IconRecycleBinFull size={48} /> : <IconRecycleBin size={48} />) : ic.icon}
                 </div>
                 <span style={{
                   fontSize: 11, color: '#fff', textAlign: 'center',
@@ -2026,23 +2026,23 @@ export default function App() {
 
         {/* ─── TASKBAR ─────────────────────────────────────────── */}
         <div style={{
-          height: 28, background: '#c0c0c0', borderTop: '2px solid #fff',
+          height: 42, background: '#c0c0c0', borderTop: '2px solid #fff',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '2px', position: 'relative', zIndex: 100000,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 2, height: '100%', overflow: 'hidden' }}>
             <button
               className={`w95-btn ${startOpen ? 'active' : ''}`}
-              style={{ display: 'flex', alignItems: 'center', gap: 3, height: 22, fontWeight: 'bold', paddingLeft: 3, paddingRight: 6, flexShrink: 0 }}
+              style={{ display: 'flex', alignItems: 'center', gap: 6, height: 34, fontWeight: 'bold', paddingLeft: 6, paddingRight: 10, flexShrink: 0, fontSize: 16 }}
               onClick={(e) => { e.stopPropagation(); setStartOpen(!startOpen); setProgramsOpen(false); }}
             >
-              <img src="/windows95.png" alt="Start" style={{ height: 14, width: 'auto' }} />
+              <img src="/windows95.png" alt="Start" style={{ height: 20, width: 'auto' }} />
               <span>Start</span>
             </button>
             <div style={{ width: 0, height: 20, borderLeft: '1px solid #808080', borderRight: '1px solid #fff', margin: '0 2px', flexShrink: 0 }} />
-            <button className="w95-btn" style={{ width: 22, height: 22, padding: 0, flexShrink: 0 }} title="Internet Explorer"
-              onClick={() => openWindow('IE', 'Internet Explorer', 600, 450, <IconIE size={16} />)}>
-              <IconIE size={16} />
+            <button className="w95-btn" style={{ width: 34, height: 34, padding: 0, flexShrink: 0 }} title="Internet Explorer"
+              onClick={() => openWindow('IE', 'Internet Explorer', 700, 550, <IconIE size={20} />)}>
+              <IconIE size={32} />
             </button>
             <div style={{ width: 0, height: 20, borderLeft: '1px solid #808080', borderRight: '1px solid #fff', margin: '0 2px', flexShrink: 0 }} />
             <div style={{ display: 'flex', gap: 2, overflow: 'hidden', flex: 1 }}>
@@ -2050,7 +2050,7 @@ export default function App() {
                 <button
                   key={w.id}
                   className={`w95-btn ${(activeId === w.id && !w.isMinimized) ? 'active' : ''}`}
-                  style={{ minWidth: 80, maxWidth: 160, height: 22, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: 11, display: 'flex', alignItems: 'center', gap: 3, flexShrink: 1 }}
+                  style={{ minWidth: 120, maxWidth: 200, height: 34, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: 14, display: 'flex', alignItems: 'center', gap: 6, flexShrink: 1 }}
                   onClick={() => { toggleMinimize(w.id); }}
                 >
                   <span style={{ flexShrink: 0 }}>{w.icon}</span>
@@ -2060,19 +2060,19 @@ export default function App() {
             </div>
           </div>
 
-          <div className="w95-inset-thin" style={{ height: 20, padding: '0 8px', display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, background: '#c0c0c0', marginRight: 1, flexShrink: 0 }}>
-            <span title="Volume" style={{ cursor: 'default', display: 'flex' }} onClick={() => showDialog({ title: 'Volume Control', message: 'Volume: ████████░░ 80%\n\nWave: ██████░░░░ 60%\nMIDI: ████████░░ 80%\nCD:   ██████████ 100%', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })}><IconVolume size={14} /></span>
-            <span title="Network" style={{ cursor: 'default', display: 'flex' }} onClick={() => showDialog({ title: 'Network', message: 'Connected to: The Internet\n\nSpeed: 56,000 bps\nProtocol: TCP/IP (Winsock 2.0)\nDNS: Working (eventually)\n\nBytes Sent: 1,337\nBytes Received: 42,069', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })}><IconGlobe size={14} /></span>
+          <div className="w95-inset-thin" style={{ height: 34, padding: '0 12px', display: 'flex', alignItems: 'center', gap: 12, fontSize: 14, background: '#c0c0c0', marginRight: 1, flexShrink: 0 }}>
+            <span title="Volume" style={{ cursor: 'default', display: 'flex' }} onClick={() => showDialog({ title: 'Volume Control', message: 'Volume: ████████░░ 80%\n\nWave: ██████░░░░ 60%\nMIDI: ████████░░ 80%\nCD:   ██████████ 100%', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })}><IconVolume size={18} /></span>
+            <span title="Network" style={{ cursor: 'default', display: 'flex' }} onClick={() => showDialog({ title: 'Network', message: 'Connected to: The Internet\n\nSpeed: 56,000 bps\nProtocol: TCP/IP (Winsock 2.0)\nDNS: Working (eventually)\n\nBytes Sent: 1,337\nBytes Received: 42,069', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })}><IconGlobe size={18} /></span>
             <span>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
           </div>
 
           {startOpen && (
             <div className="w95-outset" style={{
-              position: 'absolute', bottom: 28, left: 0,
-              background: '#c0c0c0', width: 220, display: 'flex', padding: 2,
+              position: 'absolute', bottom: 42, left: 0,
+              background: '#c0c0c0', width: 280, display: 'flex', padding: 2,
             }} onClick={(e) => e.stopPropagation()}>
-              <div style={{ width: 24, background: 'linear-gradient(180deg, #000080, #1084d0)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: 6 }}>
-                <span style={{ color: '#c0c0c0', fontWeight: 'bold', fontSize: 16, letterSpacing: 2, writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+              <div style={{ width: 32, background: 'linear-gradient(180deg, #000080, #1084d0)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: 10 }}>
+                <span style={{ color: '#c0c0c0', fontWeight: 'bold', fontSize: 20, letterSpacing: 2, writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
                   adam<span style={{ color: '#fff' }}>OS</span>
                 </span>
               </div>
@@ -2081,30 +2081,30 @@ export default function App() {
                   onMouseEnter={() => setProgramsOpen(true)}
                   onMouseLeave={() => setProgramsOpen(false)}
                 >
-                  <StartMenuItem icon={<IconPrograms size={24} />} label="Programs" arrow onClick={() => setProgramsOpen(!programsOpen)} />
+                  <StartMenuItem icon={<IconPrograms size={32} />} label="Programs" arrow onClick={() => setProgramsOpen(!programsOpen)} />
                   {programsOpen && (
                     <div className="w95-outset" style={{ position: 'absolute', left: '100%', top: 0, background: '#c0c0c0', width: 200, padding: 2 }}>
-                      <StartMenuItem icon={<IconMinesweeper size={24} />} label="Minesweeper" onClick={() => showDialog({ title: 'Minesweeper', message: 'Coming soon...', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
-                      <StartMenuItem icon={<IconPaint size={24} />} label="Paint" onClick={() => openWindow('PAINT', 'untitled - Paint', 560, 440, <IconPaint size={16} />)} />
-                      <StartMenuItem icon={<IconSolitaire size={24} />} label="Solitaire" onClick={() => showDialog({ title: 'Solitaire', message: 'Coming soon...', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
+                      <StartMenuItem icon={<IconMinesweeper size={32} />} label="Minesweeper" onClick={() => showDialog({ title: 'Minesweeper', message: 'Coming soon...', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
+                      <StartMenuItem icon={<IconPaint size={32} />} label="Paint" onClick={() => openWindow('PAINT', 'untitled - Paint', 700, 550, <IconPaint size={20} />)} />
+                      <StartMenuItem icon={<IconSolitaire size={32} />} label="Solitaire" onClick={() => showDialog({ title: 'Solitaire', message: 'Coming soon...', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
                       <div style={{ borderTop: '1px solid #808080', borderBottom: '1px solid #fff', margin: '2px 4px' }} />
-                      <StartMenuItem icon={<IconIE size={24} />} label="Internet Explorer" onClick={() => openWindow('IE', 'Internet Explorer', 600, 450, <IconIE size={16} />)} />
-                      <StartMenuItem icon={<IconNotepad size={24} />} label="Notepad" onClick={() => openWindow('SKILLS', 'Notepad - Skills.txt', 500, 400, <IconNotepad size={16} />)} />
-                      <StartMenuItem icon={<IconWordpad size={24} />} label="WordPad" onClick={() => openWindow('RESUME', 'Resume.doc - WordPad', 580, 520, <IconWordpad size={16} />)} />
-                      <StartMenuItem icon={<IconCalculator size={24} />} label="Calculator" onClick={() => showDialog({ title: 'Calculator', message: 'Coming soon...', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
+                      <StartMenuItem icon={<IconIE size={32} />} label="Internet Explorer" onClick={() => openWindow('IE', 'Internet Explorer', 750, 560, <IconIE size={20} />)} />
+                      <StartMenuItem icon={<IconNotepad size={32} />} label="Notepad" onClick={() => openWindow('SKILLS', 'Notepad - Skills.txt', 625, 500, <IconNotepad size={20} />)} />
+                      <StartMenuItem icon={<IconWordpad size={32} />} label="WordPad" onClick={() => openWindow('RESUME', 'Resume.doc - WordPad', 725, 650, <IconWordpad size={20} />)} />
+                      <StartMenuItem icon={<IconCalculator size={32} />} label="Calculator" onClick={() => showDialog({ title: 'Calculator', message: 'Coming soon...', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
                       <div style={{ borderTop: '1px solid #808080', borderBottom: '1px solid #fff', margin: '2px 4px' }} />
-                      <StartMenuItem icon={<IconCMD size={24} />} label="MS-DOS Prompt" onClick={() => showDialog({ title: 'MS-DOS Prompt', message: 'Coming soon...', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
-                      <StartMenuItem icon={<IconDefrag size={24} />} label="Disk Defragmenter" onClick={() => showDialog({ title: 'Disk Defragmenter', message: 'Coming soon...', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
+                      <StartMenuItem icon={<IconCMD size={32} />} label="MS-DOS Prompt" onClick={() => showDialog({ title: 'MS-DOS Prompt', message: 'Coming soon...', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
+                      <StartMenuItem icon={<IconDefrag size={32} />} label="Disk Defragmenter" onClick={() => showDialog({ title: 'Disk Defragmenter', message: 'Coming soon...', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
                     </div>
                   )}
                 </div>
-                <StartMenuItem icon={<IconFolderOpen size={24} />} label="Documents" arrow onClick={() => showDialog({ title: 'Recent Documents', message: 'Recent Documents:\n\n• parklingezegen_supabase_schema.sql\n• jarvis_architecture.md\n• ai_tracker_v4_notes.txt\n• dewitteraaf_deploy_log.txt', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
-                <StartMenuItem icon={<IconSettings size={24} />} label="Settings" arrow onClick={() => openWindow('SETTINGS', 'Display Properties', 400, 420, <IconSettings size={16} />)} />
-                <StartMenuItem icon={<IconFind size={24} />} label="Find" arrow onClick={() => openWindow('FIND', 'Find: All Files', 480, 360, <IconFind size={16} />)} />
-                <StartMenuItem icon={<IconHelp size={24} />} label="Help" onClick={() => openWindow('HELP', 'Help Topics', 500, 380, <IconHelp size={16} />)} />
-                <StartMenuItem icon={<IconRun size={24} />} label="Run..." onClick={() => openWindow('RUN', 'Run', 420, 200, <IconRun size={16} />)} />
+                <StartMenuItem icon={<IconFolderOpen size={32} />} label="Documents" arrow onClick={() => showDialog({ title: 'Recent Documents', message: 'Recent Documents:\n\n• parklingezegen_supabase_schema.sql\n• jarvis_architecture.md\n• ai_tracker_v4_notes.txt\n• dewitteraaf_deploy_log.txt', icon: 'info', buttons: [{ label: 'OK', onClick: () => { } }] })} />
+                <StartMenuItem icon={<IconSettings size={32} />} label="Settings" arrow onClick={() => openWindow('SETTINGS', 'Display Properties', 500, 525, <IconSettings size={20} />)} />
+                <StartMenuItem icon={<IconFind size={32} />} label="Find" arrow onClick={() => openWindow('FIND', 'Find: All Files', 600, 450, <IconFind size={20} />)} />
+                <StartMenuItem icon={<IconHelp size={32} />} label="Help" onClick={() => openWindow('HELP', 'Help Topics', 625, 475, <IconHelp size={20} />)} />
+                <StartMenuItem icon={<IconRun size={32} />} label="Run..." onClick={() => openWindow('RUN', 'Run', 525, 250, <IconRun size={20} />)} />
                 <div style={{ borderTop: '1px solid #808080', borderBottom: '1px solid #fff', margin: '2px 4px' }} />
-                <StartMenuItem icon={<IconShutdown size={24} />} label="Shut Down..." onClick={() => { setStartOpen(false); setShutdownActive(true); }} />
+                <StartMenuItem icon={<IconShutdown size={32} />} label="Shut Down..." onClick={() => { setStartOpen(false); setShutdownActive(true); }} />
               </div>
             </div>
           )}
@@ -2166,15 +2166,15 @@ function StartMenuItem({ icon, label, arrow, onClick }: { icon: React.ReactNode;
   return (
     <div
       onClick={(e) => { e.stopPropagation(); onClick?.(); }}
-      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '4px 8px', cursor: 'default', fontSize: 11 }}
+      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 12px', cursor: 'default', fontSize: 14 }}
       onMouseEnter={e => { (e.currentTarget).style.background = '#000080'; (e.currentTarget).style.color = '#fff'; }}
       onMouseLeave={e => { (e.currentTarget).style.background = ''; (e.currentTarget).style.color = ''; }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span style={{ width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{icon}</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <span style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{icon}</span>
         <span>{label}</span>
       </div>
-      {arrow && <span style={{ fontSize: 8 }}>▶</span>}
+      {arrow && <span style={{ fontSize: 10 }}>▶</span>}
     </div>
   );
 }
